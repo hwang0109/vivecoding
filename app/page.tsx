@@ -13,7 +13,7 @@ const INIT = [
 ];
 
 async function callClaude(body: object) {
-  const res = await fetch("/api/claude", {
+  const res = await fetch("/api", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(body),
