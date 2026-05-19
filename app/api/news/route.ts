@@ -49,6 +49,7 @@ function parseRSS(xml: string, defaultSource: string) {
       titleKo: title,
       source,
       time: pubDate ? getTime(pubDate) : '방금 전',
+      timestamp: pubDate ? new Date(pubDate).getTime() : Date.now(),
       lang: 'ko',
       url: link,
       body: title,
@@ -74,18 +75,20 @@ export async function GET() {
     )
   );
 
+  type Article = { id: number; title: string; timestamp: number };
   const seen = new Set<string>();
-  const articles = results
+  const articles = (results
     .filter(r => r.status === 'fulfilled')
     .flatMap(r => (r as PromiseFulfilledResult<object[]>).value)
     .filter(a => {
-      const key = (a as { title: string }).title;
+      const key = (a as Article).title;
       if (seen.has(key)) return false;
       seen.add(key);
       return true;
-    });
+    }) as Article[])
+    .sort((a, b) => b.timestamp - a.timestamp);
 
-  articles.forEach((a, i) => ((a as { id: number }).id = i + 1));
+  articles.forEach((a, i) => (a.id = i + 1));
 
   return NextResponse.json(articles);
 }

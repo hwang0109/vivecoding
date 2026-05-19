@@ -108,7 +108,7 @@ export default function NewsHub() {
       <header style={{ padding:`${banners.length ? "66px" : "22px"} 20px 16px`, display:"flex", justifyContent:"space-between", alignItems:"center", borderBottom:"1px solid #f0f0f0" }}>
         <div>
           <div style={{ fontSize:9, letterSpacing:3, color:"#bbb", fontWeight:700, marginBottom:2 }}>JOURNALIST</div>
-          <div style={{ fontSize:22, fontWeight:900, letterSpacing:-1, color:"#111" }}>뉴스허브</div>
+          <a href="https://news-hub-alpha-silk.vercel.app" style={{ fontSize:22, fontWeight:900, letterSpacing:-1, color:"#111", textDecoration:"none" }}>뉴스허브</a>
         </div>
         <div style={{ display:"flex", gap:8 }}>
           <button onClick={() => { setBmView(v => !v); setSelId(null); }} style={{ background: bmView ? "#111" : "transparent", color: bmView ? "#fff" : "#111", border:"1px solid #e0e0e0", borderRadius:8, padding:"7px 12px", fontSize:12, fontWeight:600, cursor:"pointer" }}>
