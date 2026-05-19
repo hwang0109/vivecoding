@@ -4,12 +4,12 @@ import { useState, useEffect } from "react";
 const CATS = ["전체", "정치", "경제", "국제", "사회", "기술"];
 
 const INIT = [
-  { id:1, badge:"속보", category:"국제", title:"North Korea Fires ICBM; US, South Korea, Japan Issue Joint Condemnation", titleKo:"북한 ICBM 발사...한미일 즉각 공동 규탄 성명", source:"AP", time:"방금 전", lang:"en", body:"North Korea launched an intercontinental ballistic missile that flew approximately 1,000 kilometers before landing in the sea east of the peninsula. The United States, South Korea, and Japan convened emergency talks and issued a joint statement condemning the launch.", bookmarked:false, translated:false, translatedBody:null },
-  { id:2, badge:"단독", category:"정치", title:"단독] 여야, 이번 주 추경안 전격 합의 유력...규모 20조 원 선", titleKo:"단독] 여야, 이번 주 추경안 전격 합의 유력...규모 20조 원 선", source:"연합뉴스", time:"8분 전", lang:"ko", body:"여야 원내 지도부가 추가경정예산안 규모를 20조 원 안팎으로 하는 합의안을 이번 주 내 처리하는 방안을 논의 중인 것으로 확인됐다.", bookmarked:false, translated:false, translatedBody:null },
-  { id:3, badge:"속보", category:"경제", title:"Fed Holds Rates Steady, Signals Two Cuts Possible in 2026", titleKo:"Fed, 금리 동결...올해 두 차례 인하 가능성 시사", source:"Reuters", time:"19분 전", lang:"en", body:"The Federal Reserve kept its benchmark rate unchanged at its May meeting but signaled it could cut rates twice before year-end if inflation continues to moderate.", bookmarked:false, translated:false, translatedBody:null },
-  { id:4, badge:null, category:"경제", title:"코스피, 외국인 순매수에 2,750 돌파...반도체 강세", titleKo:"코스피, 외국인 순매수에 2,750 돌파...반도체 강세", source:"한국경제", time:"32분 전", lang:"ko", body:"코스피가 외국인 투자자들의 대규모 순매수에 힘입어 장중 2,750선을 돌파했다. 삼성전자와 SK하이닉스 등 반도체 대형주가 지수 상승을 이끌었다.", bookmarked:false, translated:false, translatedBody:null },
-  { id:5, badge:null, category:"기술", title:"Apple Previews On-Device AI at WWDC 2026", titleKo:"애플, WWDC 2026서 온디바이스 AI 공개", source:"The Verge", time:"1시간 전", lang:"en", body:"Apple unveiled a comprehensive suite of on-device AI features at its annual developer conference, including a redesigned Siri with contextual awareness.", bookmarked:false, translated:false, translatedBody:null },
-  { id:6, badge:null, category:"사회", title:"서울 합계출산율 0.55로 역대 최저...저출산위 긴급 대책 착수", titleKo:"서울 합계출산율 0.55로 역대 최저...저출산위 긴급 대책 착수", source:"MBC", time:"2시간 전", lang:"ko", body:"서울시의 올해 1분기 합계출산율이 0.55명으로 역대 최저를 기록했다. 저출산고령사회위원회는 긴급 대책반을 꾸리고 주거·양육비 지원 확대 방안을 검토 중이다.", bookmarked:false, translated:false, translatedBody:null },
+  { id:1, badge:"속보", category:"국제", title:"North Korea Fires ICBM; US, South Korea, Japan Issue Joint Condemnation", titleKo:"북한 ICBM 발사...한미일 즉각 공동 규탄 성명", source:"AP", time:"방금 전", lang:"en", url:"https://apnews.com", body:"North Korea launched an intercontinental ballistic missile that flew approximately 1,000 kilometers before landing in the sea east of the peninsula. The United States, South Korea, and Japan convened emergency talks and issued a joint statement condemning the launch.", bookmarked:false, translated:false, translatedBody:null },
+  { id:2, badge:"단독", category:"정치", title:"단독] 여야, 이번 주 추경안 전격 합의 유력...규모 20조 원 선", titleKo:"단독] 여야, 이번 주 추경안 전격 합의 유력...규모 20조 원 선", source:"연합뉴스", time:"8분 전", lang:"ko", url:"https://www.yna.co.kr", body:"여야 원내 지도부가 추가경정예산안 규모를 20조 원 안팎으로 하는 합의안을 이번 주 내 처리하는 방안을 논의 중인 것으로 확인됐다.", bookmarked:false, translated:false, translatedBody:null },
+  { id:3, badge:"속보", category:"경제", title:"Fed Holds Rates Steady, Signals Two Cuts Possible in 2026", titleKo:"Fed, 금리 동결...올해 두 차례 인하 가능성 시사", source:"Reuters", time:"19분 전", lang:"en", url:"https://www.reuters.com", body:"The Federal Reserve kept its benchmark rate unchanged at its May meeting but signaled it could cut rates twice before year-end if inflation continues to moderate.", bookmarked:false, translated:false, translatedBody:null },
+  { id:4, badge:null, category:"경제", title:"코스피, 외국인 순매수에 2,750 돌파...반도체 강세", titleKo:"코스피, 외국인 순매수에 2,750 돌파...반도체 강세", source:"한국경제", time:"32분 전", lang:"ko", url:"https://www.hankyung.com", body:"코스피가 외국인 투자자들의 대규모 순매수에 힘입어 장중 2,750선을 돌파했다. 삼성전자와 SK하이닉스 등 반도체 대형주가 지수 상승을 이끌었다.", bookmarked:false, translated:false, translatedBody:null },
+  { id:5, badge:null, category:"기술", title:"Apple Previews On-Device AI at WWDC 2026", titleKo:"애플, WWDC 2026서 온디바이스 AI 공개", source:"The Verge", time:"1시간 전", lang:"en", url:"https://www.theverge.com", body:"Apple unveiled a comprehensive suite of on-device AI features at its annual developer conference, including a redesigned Siri with contextual awareness.", bookmarked:false, translated:false, translatedBody:null },
+  { id:6, badge:null, category:"사회", title:"서울 합계출산율 0.55로 역대 최저...저출산위 긴급 대책 착수", titleKo:"서울 합계출산율 0.55로 역대 최저...저출산위 긴급 대책 착수", source:"MBC", time:"2시간 전", lang:"ko", url:"https://www.mbc.co.kr/news", body:"서울시의 올해 1분기 합계출산율이 0.55명으로 역대 최저를 기록했다. 저출산고령사회위원회는 긴급 대책반을 꾸리고 주거·양육비 지원 확대 방안을 검토 중이다.", bookmarked:false, translated:false, translatedBody:null },
 ];
 
 async function callClaude(body: object) {
@@ -39,9 +39,15 @@ export default function NewsHub() {
   const bmCount = news.filter(n => n.bookmarked).length;
 
   useEffect(() => {
-    const t = setTimeout(() => addBanner(INIT[0]), 800);
-    return () => clearTimeout(t);
+    fetchNews();
   }, []);
+
+  useEffect(() => {
+    if (news !== INIT && news.some(n => n.badge === "속보")) {
+      const t = setTimeout(() => addBanner(news.find(n => n.badge === "속보")!), 800);
+      return () => clearTimeout(t);
+    }
+  }, [news]);
 
   const addBanner = (article: typeof INIT[0]) => {
     const bid = Math.random();
@@ -57,8 +63,8 @@ export default function NewsHub() {
         max_tokens: 2000,
         tools: [{ type: "web_search_20250305", name: "web_search" }],
         system: `You are a Korean journalist news aggregator. Search the web and return ONLY a valid JSON array of 7 news articles. No markdown fences, no extra text—just the raw JSON array.
-Each item must have exactly these keys: id (int), badge ("속보"|"단독"|null), category ("정치"|"경제"|"국제"|"사회"|"기술"), title (original lang), titleKo (Korean), source (outlet name), time (Korean relative: "방금 전"/"X분 전"/"X시간 전"), lang ("ko"|"en"), body (2-3 sentence summary in original lang), bookmarked (false), translated (false), translatedBody (null).
-Include 2 속보, 1 단독, and a mix of Korean and English foreign news.`,
+Each item must have exactly these keys: id (int), badge ("속보"|"단독"|null), category ("정치"|"경제"|"국제"|"사회"|"기술"), title (original lang), titleKo (Korean), source (outlet name), time (Korean relative: "방금 전"/"X분 전"/"X시간 전"), lang ("ko"|"en"), url (direct link to the original article), body (2-3 sentence summary in original lang), bookmarked (false), translated (false), translatedBody (null).
+Include 2 속보, 1 단독, and a mix of Korean and English foreign news. Always include a real url to the actual article.`,
         messages: [{ role: "user", content: "Search for the most important Korean and international news today for journalists." }]
       });
       const txt = data.content.filter((c: {type:string}) => c.type === "text").map((c: {text:string}) => c.text).join("");
@@ -177,13 +183,18 @@ Include 2 속보, 1 단독, and a mix of Korean and English foreign news.`,
             <div style={{ fontSize:15, lineHeight:1.9, color:"#333", marginBottom:28 }}>{sel.body}</div>
             {sel.lang !== "ko" && (
               !sel.translated
-                ? <button onClick={translate} disabled={translating} style={{ width:"100%", padding:14, background: translating ? "#888" : "#111", color:"#fff", border:"none", borderRadius:10, fontSize:14, fontWeight:700, cursor:"pointer" }}>
+                ? <button onClick={translate} disabled={translating} style={{ width:"100%", padding:14, background: translating ? "#888" : "#111", color:"#fff", border:"none", borderRadius:10, fontSize:14, fontWeight:700, cursor:"pointer", marginBottom:12 }}>
                     {translating ? "번역 중..." : "🌐 한국어로 번역하기"}
                   </button>
-                : <div style={{ background:"#f9fafb", borderRadius:10, padding:18, border:"1px solid #efefef" }}>
+                : <div style={{ background:"#f9fafb", borderRadius:10, padding:18, border:"1px solid #efefef", marginBottom:12 }}>
                     <div style={{ fontSize:10, fontWeight:800, color:"#aaa", letterSpacing:1.5, marginBottom:10 }}>🌐 AI 번역</div>
                     <div style={{ fontSize:15, lineHeight:1.9, color:"#333" }}>{sel.translatedBody}</div>
                   </div>
+            )}
+            {sel.url && (
+              <a href={sel.url} target="_blank" rel="noopener noreferrer" style={{ display:"block", width:"100%", padding:14, background:"#f5f5f5", color:"#333", border:"1px solid #e0e0e0", borderRadius:10, fontSize:14, fontWeight:700, cursor:"pointer", textAlign:"center", textDecoration:"none", boxSizing:"border-box" }}>
+                🔗 원문 보기
+              </a>
             )}
           </div>
         </div>
