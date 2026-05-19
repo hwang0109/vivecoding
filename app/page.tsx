@@ -60,21 +60,13 @@ export default function NewsHub() {
   const fetchNews = async () => {
     setLoading(true);
     try {
-      const data = await callClaude({
-        model: "claude-sonnet-4-20250514",
-        max_tokens: 5000,
-        tools: [{ type: "web_search_20250305", name: "web_search" }],
-        system: `You are a Korean journalist news aggregator. Search the web and return ONLY a valid JSON array of 15 news articles. No markdown fences, no extra text—just the raw JSON array.
-Each item must have exactly these keys: id (int), badge ("속보"|"단독"|null), category ("정치"|"경제"|"국제"|"사회"|"기술"), title (original lang), titleKo (Korean), source (outlet name), time (Korean relative: "방금 전"/"X분 전"/"X시간 전"), lang ("ko"|"en"), url (direct link to the original article), body (2-3 sentence summary in original lang), bookmarked (false), translated (false), translatedBody (null).
-Priority sources: 연합뉴스 (yna.co.kr) and YTN (ytn.co.kr) — fetch as many articles as possible from these two outlets first. Also include any 단독 exclusive articles from major Korean media. Include at least 3 속보, at least 3 단독 articles. Always include a real url to the actual article.`,
-        messages: [{ role: "user", content: "Search for the latest breaking news and exclusive (단독) articles from 연합뉴스 and YTN today. Also find other important Korean news." }]
-      });
-      const txt = data.content.filter((c: {type:string}) => c.type === "text").map((c: {text:string}) => c.text).join("");
-      const s = txt.indexOf("["), e = txt.lastIndexOf("]") + 1;
-      const arr = JSON.parse(txt.slice(s, e));
-      setNews(arr);
-      arr.filter((n: typeof INIT[0]) => n.badge === "속보").forEach(addBanner);
-      setSelId(null);
+      const res = await fetch("/api/news");
+      const arr = await res.json();
+      if (Array.isArray(arr) && arr.length > 0) {
+        setNews(arr);
+        arr.filter((n: typeof INIT[0]) => n.badge === "속보").forEach(addBanner);
+        setSelId(null);
+      }
     } catch(err) { console.error(err); }
     setLoading(false);
   };
