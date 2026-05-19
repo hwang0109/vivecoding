@@ -4,6 +4,7 @@ const FEEDS = [
   { url: 'https://news.google.com/rss/search?q=site:yna.co.kr&hl=ko&gl=KR&ceid=KR:ko', source: '연합뉴스' },
   { url: 'https://news.google.com/rss/search?q=site:ytn.co.kr&hl=ko&gl=KR&ceid=KR:ko', source: 'YTN' },
   { url: 'https://news.google.com/rss/search?q=%EB%8B%A8%EB%8F%85+%ED%95%9C%EA%B5%AD+%EB%89%B4%EC%8A%A4&hl=ko&gl=KR&ceid=KR:ko', source: '단독' },
+  { url: 'https://news.google.com/rss/search?q=%EC%8B%A0%EC%A3%BC%EC%9D%80+site:kmib.co.kr&hl=ko&gl=KR&ceid=KR:ko', source: '국민일보' },
 ];
 
 function getCategory(title: string) {
